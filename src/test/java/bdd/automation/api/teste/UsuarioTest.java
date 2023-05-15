@@ -30,7 +30,6 @@ public class UsuarioTest extends BaseTest{
     public void testCriaUsuarioComSucesso(){
         Usuario usuario = new Usuario("Michel","Analista","email@gmail.com");
         given().
-                contentType(ContentType.JSON).
                 body(usuario).
                 when().
                 post("/users").

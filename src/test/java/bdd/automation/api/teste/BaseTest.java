@@ -1,6 +1,8 @@
 package bdd.automation.api.teste;
 
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
 import org.junit.BeforeClass;
 
 import static io.restassured.RestAssured.basePath;
@@ -13,5 +15,9 @@ public class BaseTest {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         baseURI = "https://reqres.in/";
         basePath = "/api";
+
+        RestAssured.requestSpecification = new RequestSpecBuilder()
+                .setContentType(ContentType.JSON)
+                .build();
     }
 }

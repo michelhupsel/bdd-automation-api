@@ -15,7 +15,6 @@ public class RegistroTest extends BaseTest{
         Usuario usuario = new Usuario();
         usuario.setEmail("sydney@fife");
         given().
-                contentType(ContentType.JSON).
                 body(usuario).
                 when().
                 post("/register").
