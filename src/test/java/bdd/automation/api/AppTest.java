@@ -3,8 +3,10 @@
  */
 package bdd.automation.api;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
@@ -14,6 +16,12 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 
 public class AppTest {
+
+    @BeforeClass
+    public static void setup(){
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
+
     @Test
     public void testListaMetadadosDoUsuario() {
         when().
@@ -26,10 +34,10 @@ public class AppTest {
 
     @Test
     public void testCriaUsuarioComSucesso(){
-        given().log().all().
+        given().
+                contentType(ContentType.JSON).
                 body("{\"name\":\"Michel\",\n" +
                         "\"job\":\"Analista\"}").
-                contentType(ContentType.JSON).
                 when().
                 post("https://reqres.in/api/users").
                 then().
