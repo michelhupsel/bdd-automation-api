@@ -3,6 +3,7 @@
  */
 package bdd.automation.api.teste;
 
+import bdd.automation.api.dominio.Usuario;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
@@ -36,10 +37,10 @@ public class UsuarioTest {
 
     @Test
     public void testCriaUsuarioComSucesso(){
+        Usuario usuario = new Usuario("Michel","Analista");
         given().
                 contentType(ContentType.JSON).
-                body("{\"name\":\"Michel\",\n" +
-                        "\"job\":\"Analista\"}").
+                body(usuario).
                 when().
                 post("/users").
                 then().
