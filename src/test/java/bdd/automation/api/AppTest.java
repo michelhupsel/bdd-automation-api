@@ -3,12 +3,22 @@
  */
 package bdd.automation.api;
 
+import org.apache.http.HttpStatus;
 import org.junit.Test;
+
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
 
 public class AppTest {
-    @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+    @Test
+    public void testListaMetadadosDoUsuario() {
+        when().
+                get("https://reqres.in/api/users?page=2").
+        then().
+               statusCode(HttpStatus.SC_OK).
+               body("page",is(2)).
+               body("data",is(notNullValue()));
     }
 }

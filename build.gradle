@@ -10,4 +10,5 @@ repositories {
 dependencies {
 //    implementation 'com.google.guava:guava:28.2-jre'
     testImplementation 'junit:junit:4.+'
+    testImplementation 'io.rest-assured:rest-assured:4.3.0'
 }
