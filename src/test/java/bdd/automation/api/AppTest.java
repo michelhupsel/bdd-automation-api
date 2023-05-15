@@ -3,9 +3,11 @@
  */
 package bdd.automation.api;
 
+import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 
+import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.*;
@@ -20,5 +22,18 @@ public class AppTest {
                statusCode(HttpStatus.SC_OK).
                body("page",is(2)).
                body("data",is(notNullValue()));
+    }
+
+    @Test
+    public void testCriaUsuarioComSucesso(){
+        given().log().all().
+                body("{\"name\":\"Michel\",\n" +
+                        "\"job\":\"Analista\"}").
+                contentType(ContentType.JSON).
+                when().
+                post("https://reqres.in/api/users").
+                then().
+                statusCode(HttpStatus.SC_CREATED).
+                body("name",is("Michel"));
     }
 }
