@@ -19,24 +19,39 @@ public class TesteUsuario extends TesteBase {
     @Test
     public void testeMostraPaginaEspecifica() {
         given().
-                params("page","2").
-        when().
+                params("page", "2").
+                when().
                 get(LISTA_USUARIOS_ENDPOINT).
-        then().
-               statusCode(HttpStatus.SC_OK).
-               body("page",is(2)).
-               body("data",is(notNullValue()));
+                then().
+                statusCode(HttpStatus.SC_OK).
+                body("page", is(2)).
+                body("data", is(notNullValue()));
     }
 
     @Test
-    public void testeCriaUsuarioComSucesso(){
-        Usuario usuario = new Usuario("Michel","Analista","email@gmail.com");
+    public void testeCriaUsuarioComSucesso() {
+        Usuario usuario = new Usuario("Michel", "Analista", "email@gmail.com");
         given().
                 body(usuario).
                 when().
                 post(CRIA_USUARIOS_ENDPOINT).
                 then().
                 statusCode(HttpStatus.SC_CREATED).
-                body("name",is("Michel"));
+                body("name", is("Michel"));
+    }
+
+    @Test
+    public void testeTamanhoDosItensMostradosIgualAoPerPage() {
+        given().
+                params("page", "2").
+                when().
+                get(LISTA_USUARIOS_ENDPOINT).
+                then().
+                statusCode(HttpStatus.SC_OK).
+                body(
+                        "page", is(2),
+                        "data.size()",is(6),
+                        "data.findAll {it.avatar.startsWith('https://reqres.in/')}.size()",is(6)
+                );
     }
 }
