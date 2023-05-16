@@ -1,11 +1,20 @@
 package bdd.automation.api.dominio;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Usuario {
 
+    @JsonAlias("first_name")
     private String name;
     private String job;
 
     private String email;
+    @JsonAlias("last_name")
+    private String lastName;
 
     public Usuario(){}
 
@@ -29,5 +38,15 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @JsonGetter("ultimo_nome") //serialização - objeto para json
+    public String getLastName() {
+        return lastName;
+    }
+
+    @JsonSetter("sobrenome") //desserialização - json para objeto
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
