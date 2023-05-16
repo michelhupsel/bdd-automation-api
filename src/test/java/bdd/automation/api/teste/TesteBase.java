@@ -2,7 +2,9 @@ package bdd.automation.api.teste;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
+import org.apache.http.HttpStatus;
 import org.junit.BeforeClass;
 
 import static io.restassured.RestAssured.basePath;
@@ -16,8 +18,15 @@ public class TesteBase {
         baseURI = "https://reqres.in/";
         basePath = "/api";
 
+        //request specification
         RestAssured.requestSpecification = new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
                 .build();
+
+        //response specification
+        RestAssured.responseSpecification = new ResponseSpecBuilder()
+                .expectContentType(ContentType.JSON)
+                .build();
+
     }
 }
