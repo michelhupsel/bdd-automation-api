@@ -4,7 +4,6 @@
 package bdd.automation.api.teste;
 
 import bdd.automation.api.dominio.Usuario;
-import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 
@@ -12,13 +11,13 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-public class UsuarioTest extends BaseTest{
+public class TesteUsuario extends TesteBase {
 
     private static final String LISTA_USUARIOS_ENDPOINT = "/users";
     private static final String CRIA_USUARIOS_ENDPOINT = "/user";
 
     @Test
-    public void testListaMetadadosDoUsuario() {
+    public void testeMostraPaginaEspecifica() {
         given().
                 params("page","2").
         when().
@@ -30,7 +29,7 @@ public class UsuarioTest extends BaseTest{
     }
 
     @Test
-    public void testCriaUsuarioComSucesso(){
+    public void testeCriaUsuarioComSucesso(){
         Usuario usuario = new Usuario("Michel","Analista","email@gmail.com");
         given().
                 body(usuario).
