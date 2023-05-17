@@ -7,6 +7,9 @@ import bdd.automation.api.dominio.Usuario;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,7 +34,9 @@ public class TesteUsuario extends TesteBase {
 
     @Test
     public void testeCriaUsuarioComSucesso() {
-        Usuario usuario = new Usuario("Michel", "Analista", "email@gmail.com","Silva");
+        Map<String, String> usuario = new HashMap<>();
+        usuario.put("name", "Michel");
+        usuario.put("job", "Analista");
         given().
                 body(usuario).
                 when().
@@ -67,10 +72,10 @@ public class TesteUsuario extends TesteBase {
                 then().
                 statusCode(HttpStatus.SC_OK).
                 extract().
-                body().jsonPath().getObject("data",Usuario.class);
+                body().jsonPath().getObject("data", Usuario.class);
 
-        assertThat(usuario.getEmail(),containsString("@reqres.in"));
-        assertThat(usuario.getName(),is("Janet"));
+        assertThat(usuario.getEmail(), containsString("@reqres.in"));
+        assertThat(usuario.getName(), is("Janet"));
 //        assertThat(usuario.getLastName(),is("Weaver"));
 
     }
