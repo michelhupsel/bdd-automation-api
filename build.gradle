@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id "io.freefair.lombok" version "5.0.1"
 }
 
 repositories {
@@ -9,6 +10,7 @@ repositories {
 
 dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.+'
+
     testImplementation 'junit:junit:4.+'
     testImplementation 'io.rest-assured:rest-assured:4.3.0'
 }
