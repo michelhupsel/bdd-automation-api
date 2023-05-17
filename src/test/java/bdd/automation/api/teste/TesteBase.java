@@ -15,7 +15,7 @@ public class TesteBase {
     @BeforeClass
     public static void setup(){
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        baseURI = "https://reqres.in/";
+        baseURI = "https://reqres.in";
         basePath = "/api";
 
         //request specification
